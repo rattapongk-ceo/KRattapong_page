@@ -64,6 +64,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const tagButtons = document.querySelectorAll('.tag-btn');
             const articles = document.querySelectorAll('article');
+            const articleTags = document.querySelectorAll('.article-tags .tag');
 
             // Add click event to each tag button
             tagButtons.forEach(button => {
@@ -77,16 +78,63 @@
                     // Get selected tag
                     const selectedTag = this.getAttribute('data-tag');
 
+                    // Convert to lowercase for comparison
+                    const normalizedTag = selectedTag.toLowerCase();
+
                     // Show/hide articles based on selected tag
                     articles.forEach(article => {
-                        const articleTags = article.getAttribute('data-tags');
+                        const articleTagsList = article.getAttribute('data-tags');
 
-                        if (selectedTag === 'all' || articleTags.includes(selectedTag)) {
+                        if (normalizedTag === 'all' || (articleTagsList && articleTagsList.toLowerCase().includes(normalizedTag))) {
                             article.style.display = 'block';
                         } else {
                             article.style.display = 'none';
                         }
                     });
+                });
+            });
+
+            // Add click event to each individual article tag
+            articleTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Get the tag text and normalize it
+                    const clickedTag = this.textContent.trim().toLowerCase();
+
+                    // Remove active class from all filter buttons
+                    tagButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Find matching filter button and activate it
+                    const matchingButton = Array.from(tagButtons).find(btn =>
+                        btn.textContent.toLowerCase().includes(clickedTag) ||
+                        clickedTag.includes(btn.textContent.toLowerCase())
+                    );
+
+                    if (matchingButton) {
+                        matchingButton.classList.add('active');
+                    }
+
+                    // Filter articles based on the clicked tag
+                    articles.forEach(article => {
+                        const articleTagsList = article.getAttribute('data-tags');
+
+                        if (articleTagsList && articleTagsList.toLowerCase().includes(clickedTag)) {
+                            article.style.display = 'block';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+
+                // Add hover effect to make it clear that tags are clickable
+                tag.style.cursor = 'pointer';
+                tag.addEventListener('mouseenter', function() {
+                    this.style.opacity = '0.8';
+                    this.style.transform = 'scale(1.05)';
+                });
+
+                tag.addEventListener('mouseleave', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1)';
                 });
             });
         });
