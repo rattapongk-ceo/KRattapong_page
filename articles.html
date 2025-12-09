@@ -17,7 +17,6 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="profile.html">Profile</a></li>
-                <li><a href="interests.html">Interests</a></li>
                 <li><a href="articles.html">Articles</a></li>
             </ul>
         </nav>
@@ -27,8 +26,17 @@
             <h2>Insights & Articles</h2>
             <p>Explore my latest thoughts on leadership, accounting innovations, and business strategy.</p>
 
+            <!-- Tag Filtering System -->
+            <div class="tag-filters">
+                <button class="tag-btn active" data-tag="all">All Articles</button>
+                <button class="tag-btn" data-tag="business">Business Strategy</button>
+                <button class="tag-btn" data-tag="leadership">Leadership</button>
+                <button class="tag-btn" data-tag="marketing">Marketing</button>
+                <button class="tag-btn" data-tag="accounting">Accounting</button>
+            </div>
+
             <div class="articles-grid">
-                <article>
+                <article data-tags="marketing,business">
                     <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                         <i class="fas fa-file-alt" style="font-size: 2.5rem; color: #3498db; margin-right: 1rem;"></i>
                         <div>
@@ -41,11 +49,49 @@
                         </div>
                     </div>
                     <p>การวิเคราะห์และทำความเข้าใจกระบวนการต่างๆ ที่ลูกค้าใช้ตั้งแต่เริ่มต้นรู้จักแบรนด์จนถึงขั้นตอนการตัดสินใจซื้อ พร้อมกลยุทธ์ในการปรับปรุงประสบการณ์ของลูกค้าในแต่ละขั้นตอน</p>
+                    <div class="article-tags">
+                        <span class="tag">Marketing</span>
+                        <span class="tag">Business Strategy</span>
+                    </div>
                     <a href="customer-journey-map.html"><i class="fas fa-arrow-right"></i> อ่านบทความ</a>
                 </article>
             </div>
         </section>
     </main>
+
+    <script>
+        // Tag filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagButtons = document.querySelectorAll('.tag-btn');
+            const articles = document.querySelectorAll('article');
+
+            // Add click event to each tag button
+            tagButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tagButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Add active class to clicked button
+                    this.classList.add('active');
+
+                    // Get selected tag
+                    const selectedTag = this.getAttribute('data-tag');
+
+                    // Show/hide articles based on selected tag
+                    articles.forEach(article => {
+                        const articleTags = article.getAttribute('data-tags');
+
+                        if (selectedTag === 'all' || articleTags.includes(selectedTag)) {
+                            article.style.display = 'block';
+                        } else {
+                            article.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
     <footer>
         <div class="footer-content">
             <div class="footer-column">
@@ -62,7 +108,6 @@
                 <h3>Quick Links</h3>
                 <a href="index.html">Home</a>
                 <a href="profile.html">Profile</a>
-                <a href="interests.html">Interests</a>
                 <a href="articles.html">Articles</a>
             </div>
             <div class="footer-column">
