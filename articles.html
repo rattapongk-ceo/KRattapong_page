@@ -128,6 +128,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            min-width: 120px;
         }
 
         .add-article-btn:hover {
@@ -168,16 +169,17 @@
             <p>Explore my latest thoughts on leadership, accounting innovations, and business strategy.</p>
 
             <!-- Tag Filtering System -->
-            <div class="tag-filters">
-                <button class="tag-btn active" data-tag="all">All Articles</button>
-                <button class="tag-btn" data-tag="business">Business Strategy</button>
-                <button class="tag-btn" data-tag="leadership">Leadership</button>
-                <button class="tag-btn" data-tag="marketing">Marketing</button>
-                <button class="tag-btn" data-tag="accounting">Accounting</button>
-            </div>
-
-            <div style="margin-bottom: 20px;">
-                <button id="addArticleBtn" class="add-article-btn">I did it!!!</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="tag-filters">
+                    <button class="tag-btn active" data-tag="all">All Articles</button>
+                    <button class="tag-btn" data-tag="business">Business Strategy</button>
+                    <button class="tag-btn" data-tag="leadership">Leadership</button>
+                    <button class="tag-btn" data-tag="marketing">Marketing</button>
+                    <button class="tag-btn" data-tag="accounting">Accounting</button>
+                </div>
+                <div>
+                    <button id="addArticleBtn" class="add-article-btn">I did it!!!</button>
+                </div>
             </div>
 
             <div class="articles-grid">
