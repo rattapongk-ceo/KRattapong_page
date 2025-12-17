@@ -60,6 +60,108 @@
         }
     </style>
 
+    <!-- CSS for the modal and form -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .add-article-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .add-article-btn:hover {
+            background: #219a52;
+        }
+
+        #passwordSection {
+            margin-bottom: 15px;
+        }
+
+        #passwordInput {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        #verifyPasswordBtn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #verifyPasswordBtn:hover {
+            background: #2980b9;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+
     <main>
         <section>
             <h2>Insights & Articles</h2>
@@ -72,6 +174,10 @@
                 <button class="tag-btn" data-tag="leadership">Leadership</button>
                 <button class="tag-btn" data-tag="marketing">Marketing</button>
                 <button class="tag-btn" data-tag="accounting">Accounting</button>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <button id="addArticleBtn" class="add-article-btn">I did it!!!</button>
             </div>
 
             <div class="articles-grid">
@@ -211,6 +317,57 @@
                 </article>
             </div>
         </section>
+
+        <!-- Modal for adding new article -->
+        <div id="addArticleModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Article</h2>
+
+                <div id="passwordSection">
+                    <label for="passwordInput">Enter Password:</label>
+                    <input type="password" id="passwordInput" placeholder="Enter password to continue">
+                    <button id="verifyPasswordBtn">Verify</button>
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+
+                <div id="formSection" style="display:none;">
+                    <div class="form-group">
+                        <label for="articleTitle">Topic Name:</label>
+                        <input type="text" id="articleTitle" placeholder="Enter the topic name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleContent">Content:</label>
+                        <textarea id="articleContent" placeholder="Enter the article content"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coverImage">Cover Picture URL:</label>
+                        <input type="text" id="coverImage" placeholder="Enter the cover image URL">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="creditLink">Credit Link or Text (optional):</label>
+                        <input type="text" id="creditLink" placeholder="Enter credit link or text">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleTag">Tag:</label>
+                        <select id="articleTag">
+                            <option value="business">Business Strategy</option>
+                            <option value="leadership">Leadership</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="accounting">Accounting</option>
+                            <option value="book-review">Book Review</option>
+                            <option value="management">Management</option>
+                        </select>
+                    </div>
+
+                    <button id="submitArticleBtn">Add Article</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -220,6 +377,18 @@
             const articles = document.querySelectorAll('article');
             const articleTags = document.querySelectorAll('.article-tags .tag');
             const readMoreButtons = document.querySelectorAll('.read-more-btn');
+
+            // Elements for the "I did it!!!" functionality
+            const addArticleBtn = document.getElementById('addArticleBtn');
+            const modal = document.getElementById('addArticleModal');
+            const closeBtn = document.querySelector('.close');
+            const passwordInput = document.getElementById('passwordInput');
+            const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
+            const passwordSection = document.getElementById('passwordSection');
+            const formSection = document.getElementById('formSection');
+            const passwordError = document.getElementById('passwordError');
+            const submitArticleBtn = document.getElementById('submitArticleBtn');
+            const articlesGrid = document.querySelector('.articles-grid');
 
             // Add click event to each tag button
             tagButtons.forEach(button => {
@@ -311,6 +480,200 @@
                         button.textContent = 'อ่านเพิ่มเติม';
                     }
                 });
+            });
+
+            // "I did it!!!" button functionality
+            addArticleBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                passwordInput.value = '';
+                passwordError.textContent = '';
+                formSection.style.display = 'none';
+                passwordSection.style.display = 'block';
+            });
+
+            // Close modal when clicking the X
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Verify password
+            verifyPasswordBtn.addEventListener('click', function() {
+                const password = passwordInput.value;
+                if (password === 'Ilovenick') {
+                    passwordError.textContent = '';
+                    passwordSection.style.display = 'none';
+                    formSection.style.display = 'block';
+                } else {
+                    passwordError.textContent = 'Incorrect password. Please try again.';
+                }
+            });
+
+            // Submit new article
+            submitArticleBtn.addEventListener('click', function() {
+                const title = document.getElementById('articleTitle').value;
+                const content = document.getElementById('articleContent').value;
+                const coverImage = document.getElementById('coverImage').value;
+                const creditLink = document.getElementById('creditLink').value;
+                const tag = document.getElementById('articleTag').value;
+
+                if (!title || !content) {
+                    alert('Please fill in at least the title and content fields.');
+                    return;
+                }
+
+                // Get current date in the format used in the articles
+                const now = new Date();
+                const months = ["January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"];
+                const dateStr = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+                // Determine the icon based on the tag
+                let iconClass = 'fas fa-file';
+                let iconColor = '#3498db';
+
+                switch(tag) {
+                    case 'accounting':
+                        iconClass = 'fas fa-file-contract';
+                        iconColor = '#27ae60';
+                        break;
+                    case 'book-review':
+                        iconClass = 'fas fa-book';
+                        iconColor = '#9b59b6';
+                        break;
+                    case 'leadership':
+                        iconClass = 'fas fa-chalkboard-teacher';
+                        iconColor = '#e67e22';
+                        break;
+                    case 'marketing':
+                        iconClass = 'fas fa-chart-line';
+                        iconColor = '#3498db';
+                        break;
+                    case 'business':
+                        iconClass = 'fas fa-briefcase';
+                        iconColor = '#f39c12';
+                        break;
+                    default:
+                        iconClass = 'fas fa-file';
+                        iconColor = '#3498db';
+                }
+
+                // Create the new article element
+                const newArticle = document.createElement('article');
+                newArticle.setAttribute('data-tags', tag);
+
+                // Determine if there's a credit link
+                let readMoreLink = '';
+                if (creditLink) {
+                    // Check if it's a URL or just text
+                    if (creditLink.startsWith('http')) {
+                        readMoreLink = `<a href="${creditLink}" target="_blank"><i class="fas fa-arrow-right"></i> อ่านบทความ</a>`;
+                    } else {
+                        readMoreLink = `<a href="#"><i class="fas fa-arrow-right"></i> ${creditLink}</a>`;
+                    }
+                } else {
+                    readMoreLink = '<a href="#"><i class="fas fa-arrow-right"></i> อ่านบทความ</a>';
+                }
+
+                // Create preview text (first 100 characters of the content)
+                let previewText = content.substring(0, 100);
+                if (content.length > 100) {
+                    previewText += '...';
+                }
+
+                // Generate tag display name
+                let tagDisplayName = '';
+                switch(tag) {
+                    case 'accounting':
+                        tagDisplayName = 'Accounting';
+                        break;
+                    case 'book-review':
+                        tagDisplayName = 'Book Review';
+                        break;
+                    case 'leadership':
+                        tagDisplayName = 'Leadership';
+                        break;
+                    case 'marketing':
+                        tagDisplayName = 'Marketing';
+                        break;
+                    case 'business':
+                        tagDisplayName = 'Business Strategy';
+                        break;
+                    case 'management':
+                        tagDisplayName = 'Management';
+                        break;
+                    default:
+                        tagDisplayName = tag.charAt(0).toUpperCase() + tag.slice(1);
+                }
+
+                newArticle.innerHTML = `
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        ${coverImage ? `<img src="${coverImage}" alt="${title}" style="width: 60px; height: 60px; margin-right: 1rem; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">` :
+                          `<i class="${iconClass}" style="font-size: 2.5rem; color: ${iconColor}; margin-right: 1rem;"></i>`}
+                        <div>
+                            <h3>${title}</h3>
+                            <div class="meta">
+                                <i class="far fa-calendar"></i> ${dateStr}
+                                <span style="margin: 0 10px;">|</span>
+                                <i class="far fa-clock"></i> ${Math.ceil(content.split(' ').length / 200)} min read
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p class="preview-text">${previewText}</p>
+                        <div class="full-text" style="display: none;">
+                            ${content.split('\n').map(p => `<p>${p}</p>`).join('')}
+                        </div>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">${tagDisplayName}</span>
+                    </div>
+                    <div class="read-more-container">
+                        <button class="read-more-btn">อ่านเพิ่มเติม</button>
+                        ${readMoreLink}
+                    </div>
+                `;
+
+                // Insert the new article at the beginning of the articles grid
+                articlesGrid.insertBefore(newArticle, articlesGrid.firstChild);
+
+                // Add event listener to the new read more button
+                const newReadMoreBtn = newArticle.querySelector('.read-more-btn');
+                newReadMoreBtn.addEventListener('click', function() {
+                    const article = this.closest('article');
+                    const previewText = article.querySelector('.preview-text');
+                    const fullText = article.querySelector('.full-text');
+                    const button = article.querySelector('.read-more-btn');
+
+                    if (fullText.style.display === 'none' || fullText.style.display === '') {
+                        // Show full text
+                        fullText.style.display = 'block';
+                        button.textContent = 'แสดงน้อยลง';
+                    } else {
+                        // Show preview text only
+                        fullText.style.display = 'none';
+                        button.textContent = 'อ่านเพิ่มเติม';
+                    }
+                });
+
+                // Reset form and close modal
+                document.getElementById('articleTitle').value = '';
+                document.getElementById('articleContent').value = '';
+                document.getElementById('coverImage').value = '';
+                document.getElementById('creditLink').value = '';
+                document.getElementById('articleTag').value = 'business';
+
+                modal.style.display = 'none';
+
+                // Reset the form display
+                formSection.style.display = 'none';
+                passwordSection.style.display = 'block';
             });
         });
     </script>
