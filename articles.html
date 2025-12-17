@@ -345,8 +345,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="coverImage">Cover Picture URL:</label>
-                        <input type="text" id="coverImage" placeholder="Enter the cover image URL">
+                        <label for="coverImageUpload">Upload Cover Picture:</label>
+                        <input type="file" id="coverImageUpload" accept="image/*">
+                        <div id="imagePreview" style="margin-top: 10px; display: none;">
+                            <p>Preview:</p>
+                            <img id="previewImage" style="max-width: 200px; max-height: 200px; border: 1px solid #ccc;">
+                        </div>
+                        <input type="hidden" id="coverImage" value="">
+                        <p style="margin-top: 5px; font-size: 0.9em; color: #666;">Note: You'll need to manually upload your image to the 'image' folder and enter the URL, or use a public image hosting service and paste the URL here.</p>
                     </div>
 
                     <div class="form-group">
@@ -508,12 +514,34 @@
             // Verify password
             verifyPasswordBtn.addEventListener('click', function() {
                 const password = passwordInput.value;
-                if (password === 'Ilovenick') {
+                if (password === 'welovepakin') {
                     passwordError.textContent = '';
                     passwordSection.style.display = 'none';
                     formSection.style.display = 'block';
                 } else {
                     passwordError.textContent = 'Incorrect password. Please try again.';
+                }
+            });
+
+            // Handle image upload preview
+            const coverImageUpload = document.getElementById('coverImageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImage = document.getElementById('previewImage');
+            const coverImageHidden = document.getElementById('coverImage');
+
+            coverImageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        // Store the data URL in the hidden field
+                        coverImageHidden.value = e.target.result;
+                    }
+
+                    reader.readAsDataURL(file);
                 }
             });
 
@@ -667,9 +695,11 @@
                 // Reset form and close modal
                 document.getElementById('articleTitle').value = '';
                 document.getElementById('articleContent').value = '';
+                document.getElementById('coverImageUpload').value = '';
                 document.getElementById('coverImage').value = '';
                 document.getElementById('creditLink').value = '';
                 document.getElementById('articleTag').value = 'business';
+                imagePreview.style.display = 'none';
 
                 modal.style.display = 'none';
 
