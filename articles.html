@@ -60,108 +60,6 @@
         }
     </style>
 
-    <!-- CSS for the modal and form -->
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 8px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .add-article-btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            min-width: 120px;
-        }
-
-        .add-article-btn:hover {
-            background: #219a52;
-        }
-
-        #passwordSection {
-            margin-bottom: 15px;
-        }
-
-        #passwordInput {
-            width: 200px;
-            margin-right: 10px;
-        }
-
-        #verifyPasswordBtn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #verifyPasswordBtn:hover {
-            background: #2980b9;
-        }
-
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-    </style>
 
     <main>
         <section>
@@ -169,20 +67,135 @@
             <p>Explore my latest thoughts on leadership, accounting innovations, and business strategy.</p>
 
             <!-- Tag Filtering System -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div class="tag-filters">
-                    <button class="tag-btn active" data-tag="all">All Articles</button>
-                    <button class="tag-btn" data-tag="business">Business Strategy</button>
-                    <button class="tag-btn" data-tag="leadership">Leadership</button>
-                    <button class="tag-btn" data-tag="marketing">Marketing</button>
-                    <button class="tag-btn" data-tag="accounting">Accounting</button>
-                </div>
-                <div>
-                    <button id="addArticleBtn" class="add-article-btn">I did it!!!</button>
-                </div>
+            <div class="tag-filters">
+                <button class="tag-btn active" data-tag="all">All Articles</button>
+                <button class="tag-btn" data-tag="business">Business Strategy</button>
+                <button class="tag-btn" data-tag="leadership">Leadership</button>
+                <button class="tag-btn" data-tag="marketing">Marketing</button>
+                <button class="tag-btn" data-tag="accounting">Accounting</button>
             </div>
 
             <div class="articles-grid">
+                <article data-tags="business,management">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <img src="image/S6_Strategy in practice.png" alt="S6 Strategy for SME in practical" style="width: 60px; height: 60px; margin-right: 1rem; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div>
+                            <h3>S6 Strategy for SME in practical: เมื่อกลยุทธ์เจอความจริงในสนาม SME จะทำยังไงให้กลยุทธ์เวิร์ค</h3>
+                            <div class="meta">
+                                <i class="far fa-calendar"></i> December 21, 2025
+                                <span style="margin: 0 10px;">|</span>
+                                <i class="far fa-clock"></i> 10 min read
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <p class="preview-text">SMEs face unique challenges when implementing strategy. This article explores practical approaches for SMEs to execute strategies effectively despite resource constraints...</p>
+                        <div class="full-text" style="display: none;">
+                            <p><strong>By ดร.ศุภวัตร (Lakeshore Capital)</strong></p>
+
+                            <p><strong>Resource Constraints</strong></p>
+                            <ul>
+                                <li>Man</li>
+                                <li>Money</li>
+                                <li>Time</li>
+                            </ul>
+
+                            <p><strong>Cons for SME</strong></p>
+                            <ul>
+                                <li>Dependence on owner</li>
+                                <li>Lack of data & reliability</li>
+                            </ul>
+
+                            <p><strong>Pros for SME</strong></p>
+                            <ul>
+                                <li>Speed of decision-making</li>
+                                <li>Customer intimacy</li>
+                                <li>Ability to experiment quickly</li>
+                            </ul>
+
+                            <p><strong>SME usually fails in Execution</strong></p>
+                            <ul>
+                                <li>Know framework but lack execution plan (McKinsey, OKR, BCG, SWOT)</li>
+                                <li>Few metrics to track consistently</li>
+                                <li>Firefighting-driven (daily operations more than long-term planning)</li>
+                            </ul>
+
+                            <p><strong>Fix these 7 Pitfalls</strong></p>
+                            <ol>
+                                <li>Focus only on 3 core drivers (Sales, Margin, Cash)</li>
+                                <li>Strategy in action (Plan-Act-Review Monthly)</li>
+                                <li>Rule of 3: No more than 3 strategies</li>
+                                <li>Use mini dashboards - 5 key KPIs per department</li>
+                                <li>Assign clear initiative owners with clear measurement results</li>
+                                <li>Implement 3-hour monthly summary "Strategy pit stop"</li>
+                                <li>Link rewards to gross margin, not just revenue</li>
+                            </ol>
+
+                            <p><strong>SME Practical Strategy</strong></p>
+                            <ul>
+                                <li>Defining a competitive space that you can be unique and differentiated (หาจุดแข่งขัน อย่าเปิดหลายๆหน้าชน)</li>
+                                <li>Develop a unique and differentiated Product/Service offering</li>
+                                <li>Cost control is not a choice, it's a must</li>
+                            </ul>
+
+                            <p>ถ้าเหมือนกันทุกอย่าง 4P คุณจะแข่งกันด้วยราคา กระดาษ A4 ยังแตกต่างกันได้ (หา Pain point ผู้ใช้กระดาษ ดู Full Experience of user ให้เจอ กระดาษติด, หนักขี้เกียจยก)</p>
+
+                            <p><strong>กลยุทธ์ประยุกต์กับงบการเงิน</strong></p>
+                            <ul>
+                                <li>Higher GP% achieved from differentiated offering</li>
+                                <li>Selling & Marketing Expenses: Investment to create Revenue and higher margins (R&D, Branding, People)</li>
+                                <li>Depreciation, Interest: Real Cost, Asset Light and Fast Turnover to minimize</li>
+                            </ul>
+
+                            <p><strong>Anchor your strategy in Cash Flow</strong></p>
+                            <ul>
+                                <li>Cash is King</li>
+                                <li>Cash conversion cycle (turn stock to cash faster)</li>
+                                <li>Cash vs margins</li>
+                            </ul>
+
+                            <p><strong>Risk before returns</strong></p>
+                            <ul>
+                                <li>Volume vs Price/Cost</li>
+                                <li>Inventory is an asset</li>
+                                <li>Don't risk what you can't lose</li>
+                            </ul>
+
+                            <p><strong>Simple but real KPI</strong> (ให้ resources แต่ก็ต้อง control result, ทุกหน้าทีมี KPI เสมอ, มีตัวหารเสมอ)</p>
+                            <p>KPI ต้องมีตัวคานเสมอ เช่น ยอดขายโต แต่ inventory ต้องไม่โตนะ (Don't use single KPI)</p>
+                            <ul>
+                                <li>Sale growth</li>
+                                <li>GP margins</li>
+                                <li>Inventory days</li>
+                                <li>Efficiency/Productivity (Generation of return by sale not reduction of cost) KPI ROA ฝ่ายขายควรรับผิดชอบ เพราะ ฝ่ายขายอยากให้บจก ซื้อเครื่องจักร อยากขายเยอะๆ</li>
+                                <li>Cash conversion cycle</li>
+                            </ul>
+
+                            <p>Inventory ของงานบริการ ก็มี shelf-life เช่น ร้านนวด มีพนักงานร้านนวด เพราะต้นทุนมี เกิดขึ้น ถ้าไม่ใช้ ก็เสียเปล่า</p>
+
+                            <p>Focus on building what repeatable, measurable, transferable systems.</p>
+
+                            <p>Strategy in practice is not a one-time event but management mindset.</p>
+
+                            <p>SMEs don't need more strategy slides, they need better management rhythms.</p>
+
+                            <p><strong>A good strategy:</strong></p>
+                            <ol>
+                                <li>Fit your resources</li>
+                                <li>Clarify daily priorities</li>
+                                <li>Can be tracked regularly</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">Business Strategy</span>
+                        <span class="tag">Management</span>
+                    </div>
+                    <div class="read-more-container">
+                        <button class="read-more-btn">อ่านเพิ่มเติม</button>
+                    </div>
+                </article>
+
                 <article data-tags="book-review,leadership">
                     <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                         <img src="image/4daysweek.jpeg" alt="Four Days Week Book Cover" style="width: 60px; height: 60px; margin-right: 1rem; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -320,62 +333,6 @@
             </div>
         </section>
 
-        <!-- Modal for adding new article -->
-        <div id="addArticleModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Add New Article</h2>
-
-                <div id="passwordSection">
-                    <label for="passwordInput">Enter Password:</label>
-                    <input type="password" id="passwordInput" placeholder="Enter password to continue">
-                    <button id="verifyPasswordBtn">Verify</button>
-                    <div id="passwordError" class="error-message"></div>
-                </div>
-
-                <div id="formSection" style="display:none;">
-                    <div class="form-group">
-                        <label for="articleTitle">Topic Name:</label>
-                        <input type="text" id="articleTitle" placeholder="Enter the topic name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="articleContent">Content:</label>
-                        <textarea id="articleContent" placeholder="Enter the article content"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="coverImageUpload">Upload Cover Picture:</label>
-                        <input type="file" id="coverImageUpload" accept="image/*">
-                        <div id="imagePreview" style="margin-top: 10px; display: none;">
-                            <p>Preview:</p>
-                            <img id="previewImage" style="max-width: 200px; max-height: 200px; border: 1px solid #ccc;">
-                        </div>
-                        <input type="hidden" id="coverImage" value="">
-                        <p style="margin-top: 5px; font-size: 0.9em; color: #666;">Note: You'll need to manually upload your image to the 'image' folder and enter the URL, or use a public image hosting service and paste the URL here.</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="creditLink">Credit Link or Text (optional):</label>
-                        <input type="text" id="creditLink" placeholder="Enter credit link or text">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="articleTag">Tag:</label>
-                        <select id="articleTag">
-                            <option value="business">Business Strategy</option>
-                            <option value="leadership">Leadership</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="accounting">Accounting</option>
-                            <option value="book-review">Book Review</option>
-                            <option value="management">Management</option>
-                        </select>
-                    </div>
-
-                    <button id="submitArticleBtn">Add Article</button>
-                </div>
-            </div>
-        </div>
     </main>
 
     <script>
@@ -385,18 +342,6 @@
             const articles = document.querySelectorAll('article');
             const articleTags = document.querySelectorAll('.article-tags .tag');
             const readMoreButtons = document.querySelectorAll('.read-more-btn');
-
-            // Elements for the "I did it!!!" functionality
-            const addArticleBtn = document.getElementById('addArticleBtn');
-            const modal = document.getElementById('addArticleModal');
-            const closeBtn = document.querySelector('.close');
-            const passwordInput = document.getElementById('passwordInput');
-            const verifyPasswordBtn = document.getElementById('verifyPasswordBtn');
-            const passwordSection = document.getElementById('passwordSection');
-            const formSection = document.getElementById('formSection');
-            const passwordError = document.getElementById('passwordError');
-            const submitArticleBtn = document.getElementById('submitArticleBtn');
-            const articlesGrid = document.querySelector('.articles-grid');
 
             // Add click event to each tag button
             tagButtons.forEach(button => {
@@ -490,223 +435,6 @@
                 });
             });
 
-            // "I did it!!!" button functionality
-            addArticleBtn.addEventListener('click', function() {
-                modal.style.display = 'block';
-                passwordInput.value = '';
-                passwordError.textContent = '';
-                formSection.style.display = 'none';
-                passwordSection.style.display = 'block';
-            });
-
-            // Close modal when clicking the X
-            closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-
-            // Close modal when clicking outside of it
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-
-            // Verify password
-            verifyPasswordBtn.addEventListener('click', function() {
-                const password = passwordInput.value;
-                if (password === 'welovepakin') {
-                    passwordError.textContent = '';
-                    passwordSection.style.display = 'none';
-                    formSection.style.display = 'block';
-                } else {
-                    passwordError.textContent = 'Incorrect password. Please try again.';
-                }
-            });
-
-            // Handle image upload preview
-            const coverImageUpload = document.getElementById('coverImageUpload');
-            const imagePreview = document.getElementById('imagePreview');
-            const previewImage = document.getElementById('previewImage');
-            const coverImageHidden = document.getElementById('coverImage');
-
-            coverImageUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        previewImage.src = e.target.result;
-                        imagePreview.style.display = 'block';
-                        // Store the data URL in the hidden field
-                        coverImageHidden.value = e.target.result;
-                    }
-
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Submit new article
-            submitArticleBtn.addEventListener('click', function() {
-                const title = document.getElementById('articleTitle').value;
-                const content = document.getElementById('articleContent').value;
-                const coverImage = document.getElementById('coverImage').value;
-                const creditLink = document.getElementById('creditLink').value;
-                const tag = document.getElementById('articleTag').value;
-
-                if (!title || !content) {
-                    alert('Please fill in at least the title and content fields.');
-                    return;
-                }
-
-                // Get current date in the format used in the articles
-                const now = new Date();
-                const months = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"];
-                const dateStr = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-
-                // Determine the icon based on the tag
-                let iconClass = 'fas fa-file';
-                let iconColor = '#3498db';
-
-                switch(tag) {
-                    case 'accounting':
-                        iconClass = 'fas fa-file-contract';
-                        iconColor = '#27ae60';
-                        break;
-                    case 'book-review':
-                        iconClass = 'fas fa-book';
-                        iconColor = '#9b59b6';
-                        break;
-                    case 'leadership':
-                        iconClass = 'fas fa-chalkboard-teacher';
-                        iconColor = '#e67e22';
-                        break;
-                    case 'marketing':
-                        iconClass = 'fas fa-chart-line';
-                        iconColor = '#3498db';
-                        break;
-                    case 'business':
-                        iconClass = 'fas fa-briefcase';
-                        iconColor = '#f39c12';
-                        break;
-                    default:
-                        iconClass = 'fas fa-file';
-                        iconColor = '#3498db';
-                }
-
-                // Create the new article element
-                const newArticle = document.createElement('article');
-                newArticle.setAttribute('data-tags', tag);
-
-                // Determine if there's a credit link
-                let readMoreLink = '';
-                if (creditLink) {
-                    // Check if it's a URL or just text
-                    if (creditLink.startsWith('http')) {
-                        readMoreLink = `<a href="${creditLink}" target="_blank"><i class="fas fa-arrow-right"></i> อ่านบทความ</a>`;
-                    } else {
-                        readMoreLink = `<a href="#"><i class="fas fa-arrow-right"></i> ${creditLink}</a>`;
-                    }
-                } else {
-                    readMoreLink = '<a href="#"><i class="fas fa-arrow-right"></i> อ่านบทความ</a>';
-                }
-
-                // Create preview text (first 100 characters of the content)
-                let previewText = content.substring(0, 100);
-                if (content.length > 100) {
-                    previewText += '...';
-                }
-
-                // Generate tag display name
-                let tagDisplayName = '';
-                switch(tag) {
-                    case 'accounting':
-                        tagDisplayName = 'Accounting';
-                        break;
-                    case 'book-review':
-                        tagDisplayName = 'Book Review';
-                        break;
-                    case 'leadership':
-                        tagDisplayName = 'Leadership';
-                        break;
-                    case 'marketing':
-                        tagDisplayName = 'Marketing';
-                        break;
-                    case 'business':
-                        tagDisplayName = 'Business Strategy';
-                        break;
-                    case 'management':
-                        tagDisplayName = 'Management';
-                        break;
-                    default:
-                        tagDisplayName = tag.charAt(0).toUpperCase() + tag.slice(1);
-                }
-
-                newArticle.innerHTML = `
-                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                        ${coverImage ? `<img src="${coverImage}" alt="${title}" style="width: 60px; height: 60px; margin-right: 1rem; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">` :
-                          `<i class="${iconClass}" style="font-size: 2.5rem; color: ${iconColor}; margin-right: 1rem;"></i>`}
-                        <div>
-                            <h3>${title}</h3>
-                            <div class="meta">
-                                <i class="far fa-calendar"></i> ${dateStr}
-                                <span style="margin: 0 10px;">|</span>
-                                <i class="far fa-clock"></i> ${Math.ceil(content.split(' ').length / 200)} min read
-                            </div>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <p class="preview-text">${previewText}</p>
-                        <div class="full-text" style="display: none;">
-                            ${content.split('\n').map(p => `<p>${p}</p>`).join('')}
-                        </div>
-                    </div>
-                    <div class="article-tags">
-                        <span class="tag">${tagDisplayName}</span>
-                    </div>
-                    <div class="read-more-container">
-                        <button class="read-more-btn">อ่านเพิ่มเติม</button>
-                        ${readMoreLink}
-                    </div>
-                `;
-
-                // Insert the new article at the beginning of the articles grid
-                articlesGrid.insertBefore(newArticle, articlesGrid.firstChild);
-
-                // Add event listener to the new read more button
-                const newReadMoreBtn = newArticle.querySelector('.read-more-btn');
-                newReadMoreBtn.addEventListener('click', function() {
-                    const article = this.closest('article');
-                    const previewText = article.querySelector('.preview-text');
-                    const fullText = article.querySelector('.full-text');
-                    const button = article.querySelector('.read-more-btn');
-
-                    if (fullText.style.display === 'none' || fullText.style.display === '') {
-                        // Show full text
-                        fullText.style.display = 'block';
-                        button.textContent = 'แสดงน้อยลง';
-                    } else {
-                        // Show preview text only
-                        fullText.style.display = 'none';
-                        button.textContent = 'อ่านเพิ่มเติม';
-                    }
-                });
-
-                // Reset form and close modal
-                document.getElementById('articleTitle').value = '';
-                document.getElementById('articleContent').value = '';
-                document.getElementById('coverImageUpload').value = '';
-                document.getElementById('coverImage').value = '';
-                document.getElementById('creditLink').value = '';
-                document.getElementById('articleTag').value = 'business';
-                imagePreview.style.display = 'none';
-
-                modal.style.display = 'none';
-
-                // Reset the form display
-                formSection.style.display = 'none';
-                passwordSection.style.display = 'block';
-            });
         });
     </script>
 
